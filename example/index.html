@@ -10,7 +10,12 @@ body {
   font: 18px "Helvetica Neue";
   font-weight:300;
   text-rendering: optimizeLegibility;
-  margin-left: 20px;
+  margin-left: 20;
+}
+
+div {
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
 </head>
@@ -98,16 +103,16 @@ for(var i=-3; i<4; i++){
 TimeKnots.draw("#timeline3", agenda, {dateFormat: "%Y/%m/%d", radius: 20, showLabels: true, dateDimension:true, labelFormat: "%Y/%m/%d"});
 
 var myAgenda = [
-  {name:"Wake up", date: "2017-09-29T10:00:00"},
-  {name:"Breakfast", 	date:"2018-05-02T10:00:00"},
-  {name:"Check email", date:	"2019-01-05T10:00:00"},
-  {name:"Dinner", date:	"2019-02-05T10:00:00"},
-  {name:"Watch a movie", date:	"2019-03-05T10:00:00"},
-  {name:"Go to sleep", date:	"2019-05-01T10:00:00"},
-  {name:"Go to sleep", date:	"2019-07-05T10:00:00"}
+  {name:"M", date: "2017-09-29T10:00:00"},
+  {name:"W", 	date:"2018-05-02T10:00:00"},
+  {name:"Up", date:	"2019-01-05T10:00:00"},
+  {name:"Ava", date:	"2019-02-05T10:00:00"},
+  {name:"W", date:	"2019-03-05T10:00:00"},
+  {name:"BackAva", date:	"2019-05-01T10:00:00"},
+  {name:"Up", date:	"2019-07-05T10:00:00"}
   ];
   
-TimeKnots.draw("#myTimeline", myAgenda, {showAllLabels:	true, width:1800, dateFormat: "%Y/%m/%d", addNow:true, radius: 20, dateDimension:true, labelFormat: "%Y/%m/%d"});
+TimeKnots.draw("#myTimeline", myAgenda, {showAllLabels:	true, width:1770, dateFormat: "%Y/%m/%d", addNow:true, radius: 14, dateDimension:true, labelFormat: "%Y/%m/%d"});
 
 </script>
 
