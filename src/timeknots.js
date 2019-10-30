@@ -10,6 +10,7 @@ var TimeKnots = {
       dateFormat: "%Y/%m/%d %H:%M:%S",
       horizontalLayout: true,
       showLabels: false,
+	  showAllLabels: false,
       labelFormat: "%Y/%m/%d %H:%M:%S",
       addNow: false,
       seriesColor: d3.scale.category20(),
@@ -183,19 +184,33 @@ var TimeKnots = {
         .duration(100).attr("r", function(d){if(d.radius != undefined){return d.radius} return cfg.radius});
         tip.transition()
         .duration(100)
-    .style("opacity", 0)});
+    .style("opacity", .9)});
 
-    //Adding start and end labels
-    if(cfg.showLabels != false){
-      if(cfg.dateDimension){
-        var format = d3.time.format(cfg.labelFormat);
+	
+    //Adding start and end labels  	
+	var format = cfg.dateDimension ? d3.time.format(cfg.labelFormat) : function(d){return d};		
+	if(cfg.showAllLabels != false) {	
+	  events.map(function(d){
+		var datum = (cfg.dateDimension)?new Date(d.date).getTime():d.value;
+		var dateString = (cfg.dateDimension)?format(new Date(d.date)):d.value;
+		var radius = d.radius != undefined? d.radius: cfg.radius;
+		var ret = Math.floor(step*(datum - minValue)) + radius/2;
+
+		svg.append("text")
+        .text(dateString).style("font-size", "60%")
+        .attr("x", function(d){if(cfg.horizontalLayout){return ret} return Math.floor(this.getBBox().width/2)})
+        .attr("y", function(d){if(cfg.horizontalLayout){return Math.floor(cfg.height/2+(margin+this.getBBox().height))}return margin+this.getBBox().height/2});
+
+	 });
+	} else if(cfg.showLabels != false) {
+		if (cfg.dateDimension) {
         var startString = format(new Date(minValue));
         var endString = format(new Date(maxValue));
       }else{
-        var format = function(d){return d}; //Should I do something else?
         var startString = minValue;
         var endString = maxValue;
       }
+	  
       svg.append("text")
          .text(startString).style("font-size", "70%")
          .attr("x", function(d){if(cfg.horizontalLayout){return d3.max([0, (margin-this.getBBox().width/2)])} return Math.floor(this.getBBox().width/2)})
@@ -204,14 +219,15 @@ var TimeKnots = {
       svg.append("text")
          .text(endString).style("font-size", "70%")
          .attr("x", function(d){if(cfg.horizontalLayout){return  cfg.width -  d3.max([this.getBBox().width, (margin+this.getBBox().width/2)])} return Math.floor(this.getBBox().width/2)})
-         .attr("y", function(d){if(cfg.horizontalLayout){return Math.floor(cfg.height/2+(margin+this.getBBox().height))}return cfg.height-margin+this.getBBox().height/2})
-    }
+         .attr("y", function(d){if(cfg.horizontalLayout){return Math.floor(cfg.height/2+(margin+this.getBBox().height))}return cfg.height-margin+this.getBBox().height/2});
+
 
 
     svg.on("mousemove", function(){
         tipPixels = parseInt(tip.style("height").replace("px", ""));
+
     return tip.style("top", (d3.event.pageY-tipPixels-margin)+"px").style("left",(d3.event.pageX+20)+"px");})
-    .on("mouseout", function(){return tip.style("opacity", 0).style("top","0px").style("left","0px");});
+	.on("mouseout", function(){return tip.style("opacity", 0).style("top","0px").style("left","0px");});	 
+    }
   }
 }
-

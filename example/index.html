@@ -36,6 +36,8 @@ body {
  <h2>This week's agenda</h2>
  <h5>Shows random meetings/free days</h5>
  <div id="timeline3" style="width:500px;height: 200px;"></div>
+ <div id="myTimeline" style="width:800px;height: 200px;"></div>
+ <div id="empty" style="width:800px;height: 200px;"></div>
 </div>
 </div>
 <script type="text/javascript">
@@ -93,8 +95,19 @@ for(var i=-3; i<4; i++){
   var thiswidth = (i<0)?1:5;
   agenda.push({date: thisdate, name: thisname,  series: thisseries })
 }
-TimeKnots.draw("#timeline3", agenda, {dateFormat: "%A", radius: 20});
+TimeKnots.draw("#timeline3", agenda, {dateFormat: "%Y/%m/%d", radius: 20, showLabels: true, dateDimension:true, labelFormat: "%Y/%m/%d"});
 
+var myAgenda = [
+  {name:"Wake up", date: "2017-09-29T10:00:00"},
+  {name:"Breakfast", 	date:"2018-05-02T10:00:00"},
+  {name:"Check email", date:	"2019-01-05T10:00:00"},
+  {name:"Dinner", date:	"2019-02-05T10:00:00"},
+  {name:"Watch a movie", date:	"2019-03-05T10:00:00"},
+  {name:"Go to sleep", date:	"2019-05-01T10:00:00"},
+  {name:"Go to sleep", date:	"2019-07-05T10:00:00"}
+  ];
+  
+TimeKnots.draw("#myTimeline", myAgenda, {showAllLabels:	true, width:1800, dateFormat: "%Y/%m/%d", addNow:true, radius: 20, dateDimension:true, labelFormat: "%Y/%m/%d"});
 
 </script>
 
