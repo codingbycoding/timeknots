@@ -15,6 +15,7 @@ General Options
 * `background`: Background color of the visualization (default: `FFF`)
 * `dateFormat`: Format of the dates displayed (default: `%Y/%m/%d %H:%M:%S`)
 * `horizontalLayout`: orientation in which the timeknots will be displayed horizontal or vertical (default: `true`),
+* `showAllLabels`: Include labels showing all dates (default: `false`)
 * `showLabels`: Include labels showing the first and last dates (default: `false`)
 * `labelFormat`: Format used to display the dates in the labels (default: `%Y/%m/%d %H:%M:%S`)
 
