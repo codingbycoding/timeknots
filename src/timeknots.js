@@ -194,14 +194,55 @@ var TimeKnots = {
 		var datum = (cfg.dateDimension)?new Date(d.date).getTime():d.value;
 		var dateString = (cfg.dateDimension)?format(new Date(d.date)):d.value;
 		var radius = d.radius != undefined? d.radius: cfg.radius;
-		var ret = Math.floor(step*(datum - minValue)) + radius/2;
-
+		//var ret = Math.floor(step*(datum - minValue)) + radius/2;
+		var ret = Math.floor(step*(datum - minValue));
+		
 		svg.append("text")
-        .text(dateString).style("font-size", "60%")
+        .text(dateString).style("font-size", "53%")
         .attr("x", function(d){if(cfg.horizontalLayout){return ret} return Math.floor(this.getBBox().width/2)})
         .attr("y", function(d){if(cfg.horizontalLayout){return Math.floor(cfg.height/2+(margin+this.getBBox().height))}return margin+this.getBBox().height/2});
 
+	var x = ret + radius/2;
+	var y = Math.floor(cfg.height/2+margin) - 100;
+	 svg.append("rect")	 
+	 .attr("x", x)
+	 .attr("y", y)
+	 .attr("rx", 5)
+	 .attr("ry", 5)
+	 .attr("width", 55)
+	 .attr("height", 40)
+	 .style("stroke", "black")
+	 .style("stroke-width", 3)
+	 .style("fill", "#999")
+	 .style("opacity", .5);
 	 });
+	 
+
+
+	 /*
+	 var tip = d3.select(id)
+    .append('div')
+    .style("opacity", 0)
+    .style("position", "absolute")
+    .style("font-family", "Helvetica Neue")
+    .style("font-weight", "300")
+    .style("background","rgba(0,0,0,0.5)")
+    .style("color", "white")
+    .style("padding", "5px 10px 5px 10px")
+    .style("-moz-border-radius", "8px 8px")
+    .style("border-radius", "8px 8px");
+	
+	tip.html("");
+      if(d.img != undefined){
+        tip.append("img").style("float", "left").style("margin-right", "4px").attr("src", d.img).attr("width", "64px");
+      }
+      tip.append("div").style("float", "left").html(dateString);
+      tip.transition()
+      .duration(100)
+      .style("opacity", .9);
+	  */
+	  
+	
 	} else if(cfg.showLabels != false) {
 		if (cfg.dateDimension) {
         var startString = format(new Date(minValue));
