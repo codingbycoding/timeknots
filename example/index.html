@@ -16,8 +16,12 @@
         font: 18px 'Helvetica Neue';
         font-weight: 300;
         text-rendering: optimizeLegibility;
-        margin-left: 20;
-        margin-right: 20;
+        margin-left: 25;
+        margin-right: 25;
+      }
+
+      div {
+        margin-top: 70;
       }
     </style>
   </head>
@@ -147,7 +151,15 @@
       var agenda = new Array();
       var day = 86400000;
       var today = new Date();
-      var series = ['Serie0', 'Serie1', 'Serie2', 'Serie3', 'Serie4', 'Serie5', 'Serie6'];
+      var series = [
+        'Serie0',
+        'Serie1',
+        'Serie2',
+        'Serie3',
+        'Serie4',
+        'Serie5',
+        'Serie6',
+      ];
       for (var i = -3; i < 4; i++) {
         var thisdate = new Date(today.getTime() + i * day).toUTCString();
         var thiscolor = '#44a';
@@ -191,11 +203,21 @@
       });
 
       var myWork = [
-        {name: 'M', date: '2017-09-29T10:00:00', colorIndex: 2},
-        {name: 'W', date: '2018-05-02T10:00:00', colorIndex: 0},
-        {name: 'Ava', date: '2019-02-05T10:00:00', colorIndex: 3},
-        {name: 'W', date: '2019-03-05T10:00:00', colorIndex: 1},
-        {name: 'BackAva', date: '2019-05-01T10:00:00', colorIndex: 2},
+        {name: 'MGame', date: '2017-09-29T10:00:00', color: '#19181A'},
+        {
+          name: 'WGame',
+          date: '2018-05-02T10:00:00',
+          color: '#86C232',
+          txtDir: 'down',
+        },
+        {name: 'Avatar', date: '2019-02-05T10:00:00', color: '#2E9CCA'},
+        {
+          name: 'WGame',
+          date: '2019-03-05T10:00:00',
+          color: '#86C232',
+          txtDir: 'down',
+        },
+        {name: 'Avatar', date: '2019-05-01T10:00:00', color: '#2E9CCA'},
       ];
 
       TimeKnots.draw('#myWorkTimeline', myWork, {
@@ -210,8 +232,13 @@
       });
 
       var myUp = [
-        {name: 'Up', date: '2019-01-05T10:00:00', colorIndex: 0},
-        {name: 'Up', date: '2019-07-05T10:00:00', colorIndex: 0},
+        {name: 'MGame', date: '2017-09-29T10:00:00'},
+        {
+          name: 'SalaryUp',
+          date: '2019-01-05T10:00:00',
+          color: '#C96567',
+        },
+        {name: 'SalaryUp', date: '2019-07-05T10:00:00', color: '#C96567'},
       ];
 
       TimeKnots.draw('#myUpTimeline', myUp, {

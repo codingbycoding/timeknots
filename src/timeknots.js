@@ -3,6 +3,7 @@ var TimeKnots = {
     var cfg = {
       svgWidth: 680,
       width: 600,
+      svgHeight: 280,
       height: 200,
       radius: 10,
       lineWidth: 4,
@@ -43,7 +44,7 @@ var TimeKnots = {
       .select(id)
       .append('svg')
       .attr('width', cfg.svgWidth)
-      .attr('height', cfg.height);
+      .attr('height', cfg.svgHeight);
     //Calculate times in terms of timestamps
     if (!cfg.dateDimension) {
       var timestamps = events.map(function(d) {
@@ -139,10 +140,7 @@ var TimeKnots = {
           return d.color;
         }
 
-        if (d.colorIndex != undefined) {
-          console.log('d.colorIndex:' + d.colorIndex);
-          return cfg.seriesColor(d.colorIndex); 
-        } else if (d.series != undefined) {
+        if (d.series != undefined) {
           if (series.indexOf(d.series) < 0) {
             series.push(d.series);
           }
@@ -169,10 +167,7 @@ var TimeKnots = {
           return d.color;
         }
 
-        if (d.colorIndex != undefined) { 
-          console.log('d.colorIndex:' + d.colorIndex);
-          return cfg.seriesColor(d.colorIndex); 
-        } else if (d.series != undefined) {
+        if (d.series != undefined) {
           if (series.indexOf(d.series) < 0) {
             series.push(d.series);
           }
@@ -311,8 +306,19 @@ var TimeKnots = {
             return margin + this.getBBox().height / 2;
           });
 
+
         var x = ret + radius / 2;
         var y = Math.floor(cfg.height / 2 + margin) - 100;
+
+        var xTxt = x + 5;
+        var yTxt = y + 20;
+
+        if (d.txtDir === 'down') {
+          y = Math.floor(cfg.height / 2 + margin) + 40;
+          yTxt = y + 20; 
+        }
+
+        var strokeColor = d.color ? d.color : 'gray';
         svg
           .append('rect')
           .attr('x', x)
@@ -321,20 +327,17 @@ var TimeKnots = {
           .attr('ry', 5)
           .attr('width', 55)
           .attr('height', 40)
-          .style('stroke', 'black')
-          .style('stroke-width', 3)
-          .style('fill', '#999')
-          .style('opacity', 0.5);
+          .style('stroke', strokeColor)
+          .style('stroke-width', 4)
+          .style('fill', 'white')
+          .style('opacity', 1.0);
 
-        var xTxt = x + 5
-        var yTxt = y + 20
         svg
           .append('text')
           .text(d.name)
           .style('font-size', '53%')
           .attr('x', xTxt)
           .attr('y', yTxt);
-
       });
 
       /*
