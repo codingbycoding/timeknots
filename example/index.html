@@ -17,11 +17,7 @@
         font-weight: 300;
         text-rendering: optimizeLegibility;
         margin-left: 20;
-      }
-
-      div {
-        margin-left: auto;
-        margin-right: auto;
+        margin-right: 20;
       }
     </style>
   </head>
@@ -51,7 +47,9 @@
         <h2>This week's agenda</h2>
         <h5>Shows random meetings/free days</h5>
         <div id="timeline3" style="width:500px;height: 200px;"></div>
-        <div id="myTimeline" style="width:800px;height: 200px;"></div>
+        <div id="myTimeline" style="width:1800px;height: 200px;"></div>
+        <div id="myWorkTimeline" style="width:1800px;height: 200px;"></div>
+        <div id="myUpTimeline" style="width:1800px;height: 200px;"></div>
         <div id="empty" style="width:800px;height: 200px;"></div>
       </div>
     </div>
@@ -149,7 +147,7 @@
       var agenda = new Array();
       var day = 86400000;
       var today = new Date();
-      var series = ['Serie1', 'Serie 2', 'Serie 3'];
+      var series = ['Serie0', 'Serie1', 'Serie2', 'Serie3', 'Serie4', 'Serie5', 'Serie6'];
       for (var i = -3; i < 4; i++) {
         var thisdate = new Date(today.getTime() + i * day).toUTCString();
         var thiscolor = '#44a';
@@ -158,7 +156,7 @@
           thiscolor = '#b00';
           thisname = 'Meeting';
         }
-        serieId = parseInt(Math.random() * 100) % 3;
+        serieId = parseInt(Math.random() * 100) % 7;
         thisseries = series[serieId];
         var thiswidth = i < 0 ? 1 : 5;
         agenda.push({date: thisdate, name: thisname, series: thisseries});
@@ -183,7 +181,43 @@
 
       TimeKnots.draw('#myTimeline', myAgenda, {
         showAllLabels: true,
-        width: 1770,
+        svgWidth: 1810,
+        width: 1710,
+        dateFormat: '%Y/%m/%d',
+        addNow: true,
+        radius: 14,
+        dateDimension: true,
+        labelFormat: '%Y/%m/%d',
+      });
+
+      var myWork = [
+        {name: 'M', date: '2017-09-29T10:00:00', colorIndex: 2},
+        {name: 'W', date: '2018-05-02T10:00:00', colorIndex: 0},
+        {name: 'Ava', date: '2019-02-05T10:00:00', colorIndex: 3},
+        {name: 'W', date: '2019-03-05T10:00:00', colorIndex: 1},
+        {name: 'BackAva', date: '2019-05-01T10:00:00', colorIndex: 2},
+      ];
+
+      TimeKnots.draw('#myWorkTimeline', myWork, {
+        showAllLabels: true,
+        svgWidth: 1810,
+        width: 1710,
+        dateFormat: '%Y/%m/%d',
+        addNow: true,
+        radius: 14,
+        dateDimension: true,
+        labelFormat: '%Y/%m/%d',
+      });
+
+      var myUp = [
+        {name: 'Up', date: '2019-01-05T10:00:00', colorIndex: 0},
+        {name: 'Up', date: '2019-07-05T10:00:00', colorIndex: 0},
+      ];
+
+      TimeKnots.draw('#myUpTimeline', myUp, {
+        showAllLabels: true,
+        svgWidth: 1810,
+        width: 1710,
         dateFormat: '%Y/%m/%d',
         addNow: true,
         radius: 14,

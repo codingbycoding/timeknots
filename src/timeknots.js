@@ -1,6 +1,7 @@
 var TimeKnots = {
   draw: function(id, events, options) {
     var cfg = {
+      svgWidth: 680,
       width: 600,
       height: 200,
       radius: 10,
@@ -41,7 +42,7 @@ var TimeKnots = {
     var svg = d3
       .select(id)
       .append('svg')
-      .attr('width', cfg.width)
+      .attr('width', cfg.svgWidth)
       .attr('height', cfg.height);
     //Calculate times in terms of timestamps
     if (!cfg.dateDimension) {
@@ -137,7 +138,11 @@ var TimeKnots = {
         if (d.color != undefined) {
           return d.color;
         }
-        if (d.series != undefined) {
+
+        if (d.colorIndex != undefined) {
+          console.log('d.colorIndex:' + d.colorIndex);
+          return cfg.seriesColor(d.colorIndex); 
+        } else if (d.series != undefined) {
           if (series.indexOf(d.series) < 0) {
             series.push(d.series);
           }
@@ -163,7 +168,11 @@ var TimeKnots = {
         if (d.color != undefined) {
           return d.color;
         }
-        if (d.series != undefined) {
+
+        if (d.colorIndex != undefined) { 
+          console.log('d.colorIndex:' + d.colorIndex);
+          return cfg.seriesColor(d.colorIndex); 
+        } else if (d.series != undefined) {
           if (series.indexOf(d.series) < 0) {
             series.push(d.series);
           }
@@ -316,6 +325,16 @@ var TimeKnots = {
           .style('stroke-width', 3)
           .style('fill', '#999')
           .style('opacity', 0.5);
+
+        var xTxt = x + 5
+        var yTxt = y + 20
+        svg
+          .append('text')
+          .text(d.name)
+          .style('font-size', '53%')
+          .attr('x', xTxt)
+          .attr('y', yTxt);
+
       });
 
       /*
